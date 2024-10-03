@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<!-- Mapper XML 에 지정할 namespace 이름을, 
+     Mapper Interface의 FQCN으로 지정하라! -->
+<mapper namespace="org.zerock.myapp.persistence.ComplexEmpMapper">
+  
+    <select id="rangeEmployees" resultType="org.zerock.myapp.domain.EmpVO">
+      Select * From emp
+      WHERE empno BETWEEN 7500 AND 7600
+    </select>
+
+</mapper>

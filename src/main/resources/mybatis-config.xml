@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+  <environments default="development">
+
+    <environment id="development">
+        <transactionManager type="JDBC" />
+
+        <dataSource type="UNPOOLED">
+            <!-- <property name="driver" value="oracle.jdbc.OracleDriver"/> -->
+            <!-- <property name="url" value="jdbc:oracle:thin:@xepdb1?TNS_ADMIN=C:/u01"/> -->
+
+            <property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+            <property name="url" value="jdbc:log4jdbc:oracle:thin:@xepdb1?TNS_ADMIN=C:/u01"/>
+
+            <property name="username" value="SCOTT"/>
+            <property name="password" value="oracle"/>
+
+            <property name="defaultNetworkTimeout" value="2000" />
+            <property name="driver.encoding" value="UTF8" />
+        </dataSource>
+    </environment>
+
+    <environment id="production">
+        <transactionManager type="JDBC"/>
+
+        <dataSource type="POOLED">
+            <!-- <property name="driver" value="oracle.jdbc.OracleDriver"/> -->
+            <!-- <property name="url" value="jdbc:oracle:thin:@xepdb1?TNS_ADMIN=C:/u01"/> -->
+
+            <property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+            <property name="url" value="jdbc:log4jdbc:oracle:thin:@xepdb1?TNS_ADMIN=C:/u01"/>
+
+            <property name="username" value="scott"/>
+            <property name="password" value="oracle"/>
+
+            <property name="poolMaximumActiveConnections" value="10" />
+            <property name="poolMaximumIdleConnections" value="3" />
+            <property name="poolTimeToWait" value="20000" />
+            <property name="poolPingQuery" value="SELECT 1 FROM dual" />
+            <property name="poolPingEnabled" value="true" />
+            <property name="poolPingConnectionsNotUsedFor" value="60000" />
+    
+            <property name="driver.encoding" value="utf8" />
+        </dataSource>
+    </environment>
+    
+  </environments>
+
+  <!-- 프레임워크가 검색해야될 XML Mapper에 대한 정보를 등록해야 합니다. -->
+
+  <mappers>
+  	<!-- 1. Mapper XML 파일을 등록할 때에는, 아래와 같이 resource 속성에 등록 -->
+    <mapper resource="mappers/BoardMapper.xml" />
+    <mapper resource="mappers/EmpMapper.xml" />
+    
+  	<!-- 2. Mapper Interface 타입을 등록할 때에는, 아래와 같이 class 속성에 등록 -->
+    <mapper class="org.zerock.myapp.persistence.EmpMapper"/>
+    <mapper class="org.zerock.myapp.persistence.ComplexEmpMapper"/>	<!-- ********* -->
+  </mappers>
+
+</configuration>

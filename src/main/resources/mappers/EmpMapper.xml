@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpMapper">
+  
+  <!--  Mapper 파일에 등록하는 SQL문장의 끝에 있는 세미콜론(;)은
+  반드시 빼야 합니다. -->
+  <select id="1" resultType="org.zerock.myapp.domain.EmpVO">
+    SELECT * FROM emp
+  </select>
+
+  <delete id="2">
+    DELETE FROM emp WHERE empno = #{empno} AND ename = #{ename}
+  </delete>
+  
+  <select id="3" resultType="org.zerock.myapp.domain.EmpVO">
+    SELECT * FROM emp
+    <where> 
+      <if test="ename != null">
+          ename LIKE '%'||#{ename}||'%'
+      </if>
+    </where> 
+  </select>
+  
+  <select id="4" resultType="org.zerock.myapp.domain.EmpVO">
+    SELECT * FROM emp
+    <where>
+    	  <if test="ename != null">
+        	ename LIKE '%'||#{ename}||'%'
+        </if>
+        
+        <if test="startEmpno != null and endEmpno != null">
+        	AND empno BETWEEN #{startEmpno} AND #{endEmpno}
+        </if>
+    </where>
+  </select>
+  
+  
+
+</mapper>
